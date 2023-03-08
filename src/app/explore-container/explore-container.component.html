@@ -1,4 +1,57 @@
 <div id="container">
-  <strong>{{ name }}</strong>
+  <strong>{{ name}}</strong>
   <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+
+  <ion-card>
+    <img alt="" src=""/>
+    <ion-card-header>
+      <ion-card-title></ion-card-title>
+      <ion-card-subtitle></ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content></ion-card-content>
+    <ion-button fill="clear">!Alert</ion-button>
+    <ion-button (click)="presentAlert()">alert</ion-button>
+    <!--alerta de tipo toast-->
+    <ion-button expand="block" (click)="presentToast('top')">alertToast</ion-button>
+  </ion-card>
+<!--atributos de color:primary, secondary, tertiary, success, warning, danger, dark-->
+  <ion-card color="primary">
+    <img alt="" src=""/>
+    <ion-card-header>
+      <ion-card-title></ion-card-title>
+      <ion-card-subtitle></ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item lines="none">
+          <ion-thumbnail slot="start">
+            <img src="" alt="">
+          </ion-thumbnail>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!--Items-->
+  <ion-list>
+    <ion-item>arriba de item de firebase</ion-item>
+    
+  </ion-list>
+  <ion-item>item fuera de la lista</ion-item>
+
+  <!--Aqui un infinity-scroll, pero no funciona
+  <ion-content>
+    <ion-item *ngFor="let item of items: let index"> 
+      <ion-avatar slot="start">
+        <img src="''+index" alt="">
+      </ion-avatar>
+      <ion-label>{{ item }}</ion-label>
+    </ion-item>
+    <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>
+  -->
 </div>

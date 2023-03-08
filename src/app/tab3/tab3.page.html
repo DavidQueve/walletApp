@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 3
+      Administracion
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -13,5 +13,16 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  
+    <ion-item>
+
+      <ion-label position="stacked">Nueva Cuenta:</ion-label>
+      <ion-input type="form.control" [clearInput]="true" placeholder="Enter text to see clear button" value='' [(ngModel)]="_nombre"></ion-input>
+      <ion-button expand="block" (click)="presentAlert()">Guardar</ion-button>
+    </ion-item>
+  <div id="container">
+    <strong>Advertencia</strong>
+    <p>Recuerde que su saldo disponible sera $0</p>
+    <h2>Si desea ingresar saldo a su cuenta nueva debe transferir desde otra de sus cuentas</h2>
+  </div>
 </ion-content>
