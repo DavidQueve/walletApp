@@ -15,10 +15,8 @@ export class Tab3Page {
 
   public accountList: Account[]=[];
 
-  num = Math.floor(Math.random() * (9999999999 - 1000000000 + 1)) + 1000000000;
-
   public _nombre: string="";
-  public _numeroCuenta: string=this.num.toString();;
+  public _numeroCuenta: string="";
   public _saldoDisponible: number=0;
 
   constructor(private alertController: AlertController,
@@ -27,14 +25,14 @@ export class Tab3Page {
     }
     
     async presentAlert(){
+      
+      await this.addAccount();
       const alert = await this.alertController.create({
         header: this._nombre,
         subHeader: this._numeroCuenta,
         message: "Saldo Disponible: "+this._saldoDisponible,
         buttons: ['Listo'],
       });
-      
-      await this.addAccount();
       await alert.present();
       await this.getStarted();
     }
@@ -60,7 +58,8 @@ export class Tab3Page {
   }
   
   async addAccount(){
-    
+    const num = Math.floor(Math.random() * (9999999999 - 1000000000 + 1)) + 1000000000;
+    this._numeroCuenta=num.toString();
     var data={
       nombre: this._nombre,
       numeroCuenta: this._numeroCuenta,
@@ -68,7 +67,7 @@ export class Tab3Page {
     }
 
     await this.db.object('account/'+this.accountList.length).set(data);
-    this.clearFields();
+    //this.clearFields();
   }
 
   clearFields(){

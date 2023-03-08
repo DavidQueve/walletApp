@@ -4,6 +4,7 @@ import { AlertController, ToastController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Observable } from 'rxjs';
+import { NonNullableFormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class Tab2Page {
 
   public _cuentaIni: string="";
   public _cuentaDes: string="";
-  public monto: number=0;
+  public monto: number= 10;
 
   constructor(private alertController: AlertController,
     private toastController: ToastController,
@@ -27,12 +28,13 @@ export class Tab2Page {
   
     async presentToast(position:'top' | 'middle' | 'bottom'){
       const toast = await this.toastController.create({
-        message:"El monto es de: "+this._cuentaIni,
+        message:"Transferencia Completada",
         duration: 1500,
         position: position
       });
   
       await toast.present();
+      await this.getStarted();
     }
 
   async getStarted(){
@@ -56,15 +58,48 @@ export class Tab2Page {
   }
   
   async updateAccount(){
-    console.log("hola:"+this._cuentaIni);
+
+    var dataIni={
+      id: this.accountList[parseInt(this._cuentaIni)].id,
+      nombre: this.accountList[parseInt(this._cuentaIni)].nombre,
+      numeroCuenta: this.accountList[parseInt(this._cuentaIni)].numeroCuenta,
+      saldoDisponible: this.accountList[parseInt(this._cuentaIni)].saldoDisponible
+    }
+    var dataDes={
+      id: this.accountList[parseInt(this._cuentaDes)].id,
+      nombre: this.accountList[parseInt(this._cuentaDes)].nombre,
+      numeroCuenta: this.accountList[parseInt(this._cuentaDes)].numeroCuenta,
+      saldoDisponible: this.accountList[parseInt(this._cuentaDes)].saldoDisponible
+    }
+
+    if(this.monto<dataIni.saldoDisponible){
+      dataDes.saldoDisponible = dataDes.saldoDisponible - (-this.monto);
+      dataIni.saldoDisponible = dataIni.saldoDisponible - this.monto;
+
+
+
+      await this.db.object('account/'+this._cuentaIni).set(dataIni);
+      await this.db.object('account/'+this._cuentaDes).set(dataDes);
+
+      console.log("Transferencia Completada-Monto Añadido: "+this.monto);
+      console.log("Saldo de cuenta de origen: "+dataIni.saldoDisponible);
+      console.log("Saldo de cuenta de destino: "+dataDes.saldoDisponible);
+      this.presentToast("top");
+    }else{
+      console.log("El monto > que SALDO DISPONIBLE");
+    }
+    
+    
   }
 }
 class Account {
+  id:number;
   nombre: string;
   numeroCuenta: string;
   saldoDisponible: number;
 
   constructor() {
+    this.id=0;
     this.nombre = '';
     this.numeroCuenta = '';
     this.saldoDisponible = 0;
