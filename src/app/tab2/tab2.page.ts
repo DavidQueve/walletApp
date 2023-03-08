@@ -27,13 +27,28 @@ export class Tab2Page {
     }
   
     async presentToast(position:'top' | 'middle' | 'bottom'){
-      const toast = await this.toastController.create({
+      const toastTop = await this.toastController.create({
         message:"Transferencia Completada",
         duration: 1500,
         position: position
       });
-  
-      await toast.present();
+
+      const toastBottom = await this.toastController.create({
+        message:"NO se completo la Transferencia",
+        duration: 1500,
+        position: position
+      });
+
+      switch (position){
+        case 'top':
+          await toastTop.present();
+        break;
+        case 'bottom':
+          await toastBottom.present();
+        break;
+      }
+
+      
       await this.getStarted();
     }
 
@@ -72,7 +87,7 @@ export class Tab2Page {
       saldoDisponible: this.accountList[parseInt(this._cuentaDes)].saldoDisponible
     }
 
-    if(this.monto<dataIni.saldoDisponible){
+    if(this.monto <= dataIni.saldoDisponible){
       dataDes.saldoDisponible = dataDes.saldoDisponible - (-this.monto);
       dataIni.saldoDisponible = dataIni.saldoDisponible - this.monto;
 
@@ -87,6 +102,7 @@ export class Tab2Page {
       this.presentToast("top");
     }else{
       console.log("El monto > que SALDO DISPONIBLE");
+      this.presentToast("bottom");
     }
     
     
