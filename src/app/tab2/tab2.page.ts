@@ -39,12 +39,21 @@ export class Tab2Page {
         position: position
       });
 
+      const toastMiddle = await this.toastController.create({
+        message:"Las cuentas son IGUALES",
+        duration: 1500,
+        position: position
+      });
+
       switch (position){
         case 'top':
           await toastTop.present();
         break;
         case 'bottom':
           await toastBottom.present();
+        break;
+        case 'middle':
+          await toastMiddle.present();
         break;
       }
 
@@ -87,7 +96,7 @@ export class Tab2Page {
       saldoDisponible: this.accountList[parseInt(this._cuentaDes)].saldoDisponible
     }
 
-    if(this.monto <= dataIni.saldoDisponible){
+    if(this.monto <= dataIni.saldoDisponible && this._cuentaIni!=this._cuentaDes){
       dataDes.saldoDisponible = dataDes.saldoDisponible - (-this.monto);
       dataIni.saldoDisponible = dataIni.saldoDisponible - this.monto;
 
@@ -104,7 +113,11 @@ export class Tab2Page {
       console.log("El monto > que SALDO DISPONIBLE");
       this.presentToast("bottom");
     }
-    
+
+    if(this._cuentaIni==this._cuentaDes){
+      console.log("Las cuentas son iguales");
+      this.presentToast("middle");
+    }
     
   }
 }

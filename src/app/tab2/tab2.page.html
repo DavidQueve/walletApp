@@ -17,27 +17,27 @@
 <div>
   <ion-list>
     <ion-item>
+      <ion-item lines="none">
+        <ion-label>Cuenta de Origen: </ion-label>
+      </ion-item>
       <ion-select placeholder="Cuenta de origen" [(ngModel)]="_cuentaIni">
         <ion-select-option *ngFor="let account of accountList" [value]="account.id" >
           {{ account.nombre }}
         </ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-item lines="none">
-      <ion-label>Saldo Cuenta de Origen: </ion-label>
-    </ion-item>
     <ion-item>
+      <ion-item lines="none">
+        <ion-label>Cuenta de Destino: </ion-label>
+      </ion-item>
       <ion-select placeholder="Cuenta de Destino" [(ngModel)]="_cuentaDes">
         <ion-select-option *ngFor="let account of accountList" [value]="account.id">
           {{ account.nombre }}
         </ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-item lines="none">
-      <ion-label>Saldo Cuenta de Destino: </ion-label>
-    </ion-item>
     <ion-item>
-      <Label>Monto a ingresar:  </Label>
+      <Label >Monto a ingresar:  </Label>
       <ion-input [(ngModel)]="monto"></ion-input>
     </ion-item>
   </ion-list>
