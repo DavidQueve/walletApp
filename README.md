@@ -5,8 +5,8 @@
   <h2>Requisitos previos</h2>
   <p>Antes de ejecutar esta aplicación, debes tener instalado lo siguiente en tu máquina:</p>
   <ul>
-    <li>Node.js</li>
-    <li>Ionic CLI</li>
+    <li>Node.js <code>https://nodejs.org/en/download/</code></li>
+    <li>Ionic CLI <code>npm install -g @ionic/cli</code></li>
     <li>Firebase</li>
   </ul>
   
