@@ -1,16 +1,19 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 
 import { NavController } from '@ionic/angular';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Observable } from 'rxjs';
 
+import { InfiniteScrollCustomEvent } from '@ionic/angular';
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page {
+export class Tab1Page{
 public accountList: Account[]=[];
+
+  //scroll
   constructor(private db: AngularFireDatabase)
   {
   //this.db.object('4').set({nombre:'Ahorros de Navidad',numeroCuenta:2999101214,saldoDisponible:"500"});

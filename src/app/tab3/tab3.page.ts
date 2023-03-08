@@ -15,6 +15,7 @@ export class Tab3Page {
 
   public accountList: Account[]=[];
 
+  public _id: number=0;
   public _nombre: string="";
   public _numeroCuenta: string="";
   public _saldoDisponible: number=0;
@@ -61,6 +62,7 @@ export class Tab3Page {
     const num = Math.floor(Math.random() * (9999999999 - 1000000000 + 1)) + 1000000000;
     this._numeroCuenta=num.toString();
     var data={
+      id:this.accountList.length,
       nombre: this._nombre,
       numeroCuenta: this._numeroCuenta,
       saldoDisponible: this._saldoDisponible
@@ -78,11 +80,13 @@ export class Tab3Page {
 
 }
 class Account {
+  id:number;
   nombre: string;
   numeroCuenta: string;
   saldoDisponible: number;
 
   constructor() {
+    this.id=0;
     this.nombre = '';
     this.numeroCuenta = '';
     this.saldoDisponible = 0;

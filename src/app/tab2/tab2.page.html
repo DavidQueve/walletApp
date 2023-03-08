@@ -14,7 +14,7 @@
     </ion-toolbar>
   </ion-header>
 
-<div id="container">
+<div>
   <ion-list>
     <ion-item>
       <ion-select placeholder="Cuenta de origen" [(ngModel)]="_cuentaIni">
@@ -43,5 +43,10 @@
   </ion-list>
 
   <ion-button expand="block" (click)="updateAccount()">Transferir</ion-button>
+</div>
+<div id="container">
+  <strong>Advertencia</strong>
+  <p>NO puede ingresar un monto mayor al disponible en su cuenta</p>
+  <h2>Para visualizar los cambios debe ir a <strong>CUENTAS</strong></h2>
 </div>
 </ion-content>
